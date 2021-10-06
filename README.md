@@ -7,6 +7,7 @@ Guided project for **Node DB3** Module.
   - [Project Setup](#project-setup)
   - [SQL EXAMPLES](#sql-examples)
     - [Left Join](#left-join)
+    - [Grouping & Aggregating](#grouping--aggregating)
 
 ## Prerequisites
 
@@ -70,7 +71,33 @@ left join orders as o
 	on e.employeeid = o.employeeid
 where o.orderid is null;
 ```
+### Grouping & Aggregating
+```sql
+select
+	categoryname, count(productid) as prod_count
+from products as p
+join categories as c
+	on p.categoryid = c.categoryid
+group by c.categoryid order by prod_count desc;
+```
 
 ```sql
-
+SELECT
+select 
+  shippername as Shipper,
+  count(o.OrderID) as Number_Of_Shipments
+from shippers as s
+left join orders as o on s.shipperid = o.shipperid
+group by s.shipperid order by Number_Of_Shipments desc;
+```
+```sql
+select
+	o.orderid, c.customerName, (e.firstname || ' ' || e.lastname) as employee, o.orderdate, s.shippername
+from orders as o
+join customers as c
+	on c.customerid = o.customerid
+left join employees as e
+	on e.employeeid = o.employeeid
+left join shippers as s
+	on o.shipperid = s.shipperid;
 ```
