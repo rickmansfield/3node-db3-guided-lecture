@@ -5,13 +5,13 @@ module.exports = {
 
   async getUserBy(id) {
     // STEP 1 - BUILD IT IN RAW SQL
-//     SELECT 
-//     p.id as post_id,
-//     p.contents,
-//     u.username as user
-// from users as u
-// LEFT join posts as p on u.id = p.user_id
-// WHERE u.id = 1;
+    //     SELECT 
+    //     p.id as post_id,
+    //     p.contents,
+    //     u.username as user
+    // from users as u
+    // LEFT join posts as p on u.id = p.user_id
+    // WHERE u.id = 1;
     // STEP 2 - USE www.KNEX.js DOCS TO BUILD IT IN KNEX
     const rows = await db('users as u')
       .leftJoin('posts as p', 'p.user_id', '=', 'u.id') // the '=' is optional
@@ -20,16 +20,14 @@ module.exports = {
 
     // STEP 3 - HAMMER THE ROWS INTO THE DESIRED SHAPE THE BOSS WANTS
     console.log('rows--->', rows);
-    const result = { 
+    const result = {
       user_id: rows[0].user_id,
       username: rows[0].username,
-      post: rows[0].post.id 
-      ? rows.map(row => ({ 
-        contents: row.contents,
-        post_id: row.post_id,
-      })) : []
+      post: rows[0].post.id
+        ? rows.map(row => ({ contents: row.contents, post_id: row.post_id })
+        ) : []
     }
-    
+
     console.log(result);
     return result
   },
