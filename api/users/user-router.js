@@ -9,9 +9,7 @@ router.get("/", (req, res, next) => {
     .then(users => {
       res.json(users);
     })
-    .catch(err => {
-      next(err);
-    });
+    .catch(next)
 });
 
 router.get("/:id", async (req, res, next) => {

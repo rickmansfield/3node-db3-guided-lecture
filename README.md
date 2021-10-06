@@ -8,6 +8,7 @@ Guided project for **Node DB3** Module.
   - [SQL EXAMPLES](#sql-examples)
     - [Left Join](#left-join)
     - [Grouping & Aggregating](#grouping--aggregating)
+  - [other from Lecture db blog.db3](#other-from-lecture-db-blogdb3)
 
 ## Prerequisites
 
@@ -100,4 +101,37 @@ left join employees as e
 	on e.employeeid = o.employeeid
 left join shippers as s
 	on o.shipperid = s.shipperid;
+```
+
+## other from Lecture db blog.db3
+```sql
+select
+    p.id as post_id, p.contents, u.username
+from posts as p
+left join users as u
+    on p.user_id = u.id;
+```
+
+```sql
+SELECT 
+ u.id as user_id, username, count(p.id) as post_count
+fROM users as u
+LEFT JOIN posts as p ON u.id = p.user_id 
+GROUP BY u.id order by post_count desc;
+
+```
+
+
+```sql
+
+```
+
+
+```sql
+
+```
+
+
+```sql
+
 ```
