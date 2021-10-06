@@ -10,6 +10,7 @@ Guided project for **Node DB3** Module.
     - [Users left Joined to posts WITH FILTER](#users-left-joined-to-posts-with-filter)
     - [POSTS left joined to users](#posts-left-joined-to-users)
     - [using alias](#using-alias)
+    - [Swap SupplierID & CategoryID with SupplierName & CategoryName... becuase names are easier to read than numbers](#swap-supplierid--categoryid-with-suppliername--categoryname-becuase-names-are-easier-to-read-than-numbers)
 
 ## Prerequisites
 
@@ -72,7 +73,12 @@ from posts as p
 LEFT join users as u on u.id = p.user_id;
 ```
 
-
+### Swap SupplierID & CategoryID with SupplierName & CategoryName... becuase names are easier to read than numbers
 ```sql
+SELECT 
+	p.productID, p.productName, s.supplierName, categoryID, unit, price
+FROM [Products] as p
+JOIN suppliers as s on p.supplierID = s.supplierID
+JOIN categories as c on p.CategoryID = c.CategoryID
 
 ```
