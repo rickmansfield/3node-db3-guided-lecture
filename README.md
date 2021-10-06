@@ -7,7 +7,9 @@ Guided project for **Node DB3** Module.
   - [Project Setup](#project-setup)
   - [SQL EXAMPLES](#sql-examples)
     - [USERS left joined to posts](#users-left-joined-to-posts)
+    - [Users left Joined to posts WITH FILTER](#users-left-joined-to-posts-with-filter)
     - [POSTS left joined to users](#posts-left-joined-to-users)
+    - [using alias](#using-alias)
 
 ## Prerequisites
 
@@ -38,6 +40,18 @@ FROM users
 LEFT JOIN posts ON users.id = posts.user_id;
 ```
 
+### Users left Joined to posts WITH FILTER
+```sql
+SELECT 
+    p.id as post_id,
+    p.contents,
+    u.username as user,
+    u.id as user_id
+from users as u
+LEFT join posts as p on u.id = p.user_id
+WHERE u.id = 4;
+```
+
 ### POSTS left joined to users
 ```sql
 SELECT 
@@ -48,9 +62,14 @@ FROM posts
 LEFT JOIN users ON users.id = posts.user_id;
 ```
 
-
+### using alias
 ```sql
-
+SELECT 
+    p.id as post_id,
+    p.contents,
+    u.username as user
+from posts as p
+LEFT join users as u on u.id = p.user_id;
 ```
 
 
