@@ -13,6 +13,8 @@ Guided project for **Node DB3** Module.
     - [Swap SupplierID & CategoryID with SupplierName & CategoryName... becuase names are easier to read than numbers AND GROUP by a category](#swap-supplierid--categoryid-with-suppliername--categoryname-becuase-names-are-easier-to-read-than-numbers-and-group-by-a-category)
     - [Count the number of products per categoryName](#count-the-number-of-products-per-categoryname)
     - [Count number of products per SupplierName](#count-number-of-products-per-suppliername)
+    - [Even better group by supplierID](#even-better-group-by-supplierid)
+    - [Find the most expensive item per categroy](#find-the-most-expensive-item-per-categroy)
 
 ## Prerequisites
 
@@ -79,7 +81,7 @@ LEFT join users as u on u.id = p.user_id;
 ```sql
 SELECT 
 	p.productID, p.productName, s.supplierName, categoryID, p.unit, p.price
-FROM [Products] as p
+FROM products as p
 JOIN suppliers as s on p.supplierID = s.supplierID
 JOIN categories as c on p.CategoryID = c.CategoryID
 ```
@@ -88,20 +90,37 @@ JOIN categories as c on p.CategoryID = c.CategoryID
 ```sql
 SELECT 
 	c.CategoryName, count(p.productName) as ProductCount
-FROM [Products] as p
+FROM products as p
 JOIN suppliers as s on p.supplierID = s.supplierID
 JOIN categories as c on p.CategoryID = c.CategoryID
 group by c.CategoryName
 order by productCount desc;
 ```
 ### Count number of products per SupplierName
-
 ```sql
 SELECT 
 	s.SupplierName, count(p.productName) as ProductCount
-FROM [Products] as p
+FROM products as p
 JOIN suppliers as s on p.supplierID = s.supplierID
-JOIN categories as c on p.CategoryID = c.CategoryID
 group by s.SupplierName
 order by productCount desc;
+```
+### Even better group by supplierID
+```sql
+SELECT 
+	s.SupplierName, count(p.productName) as ProductCount
+FROM products as p
+JOIN suppliers as s on p.supplierID = s.supplierID
+group by s.SupplierID
+order by productCount desc;
+```
+
+### Find the most expensive item per categroy
+```sql
+SELECT 
+	productName, c.categoryName, max(p.price) as price 
+FROM Products as p
+JOIN categories as c on p.categoryid = c.categoryid
+GROUP by c.categoryID
+order by price desc;
 ```
