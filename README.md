@@ -33,8 +33,6 @@ Please follow along as the instructor creates database access methods for a mult
 
 ## SQL EXAMPLES
 
-
-
 ### USERS left joined to posts
 ```sql
 SELECT 
